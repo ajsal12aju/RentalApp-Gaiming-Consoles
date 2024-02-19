@@ -2,7 +2,7 @@ import  express from "express";
 import mongoose from "mongoose";
 import authRoute from "./routes/auth.js"
 import usersRoute from "./routes/users.js"
- import ProductRoute from "./routes/product.js"
+import ProductRoute from "./routes/product.js"
 import cookieParser from "cookie-parser";
 import cors from "cors"
 import dotenv from "dotenv";
