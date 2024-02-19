@@ -1,38 +1,52 @@
-import User from '../models/User.js';
+import User from "../models/User.js";
+import Product from "../models/Product.js";
 
-export const updateUser = async (req, res, next)=>{
-    try {
-        const updateUser = await User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
-        res.status(200).json(updateUser);
-    }  catch (error) {
-       next(error)
+export const saveToWishlist = async (req, res, next) => {
+  try {
+    const { userID, productID } = req.body;
+    const user = await User.findById(userID);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-}
-export const deleteUser = async (req, res, next)=>{
-    try {
-        await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("HOTEL IS edited work can updated  ever");
-       
-    } catch (error) {
-       next(error)
+    const product = await Product.findById(productID);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
-}
-export const getUser = async (req, res, next)=>{
+    const index = user.wishlist.indexOf(productID);
+    if (index === -1) {
+      user.wishlist.push(productID);
+    } else {
+      user.wishlist.splice(index, 1);
+    }
+    await user.save();
+    res.status(200).json(user.wishlist);
+  } catch (error) {
+    next(error);
+  }
+};
 
-    try {
-        const user = await User.findById(req.params.id);
-        res.status(200).json(user);
-       
-    } catch (error) {
-       next(error)
+export const addToCart = async (req, res, next) => {
+  try {
+    const { userID, productID, count, bookingStartDate, bookingEndDate } =
+      req.body;
+    const user = await User.findById(userID);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-}
-export const getUsers = async (req, res, next)=>{
-     try {
-        const users = await User.find({});
-        res.status(200).json(users);
-       
-    }catch (error) {
-       next(error)
+    const product = await Product.findById(productID);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
-}
+    const cartItem = {
+      product: productID,
+      count,
+      bookingStartDate,
+      bookingEndDate,
+    };
+    user.cart.push(cartItem);
+    await user.save();
+    res.status(200).json(user.cart);
+  } catch (error) {
+    next(error);
+  }
+};

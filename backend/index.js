@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import authRoute from "./routes/auth.js"
 import usersRoute from "./routes/users.js"
  import ProductRoute from "./routes/product.js"
-// import roomsRoute from "./routes/rooms.js"
 import cookieParser from "cookie-parser";
 import cors from "cors"
 import dotenv from "dotenv";
@@ -37,9 +36,7 @@ res.send("api set")
 app.use("/api/auth",authRoute)
 app.use("/api/products",ProductRoute)
 
-app.use("/api/users",usersRoute)
-// app.use("/api/hotels",hotelsRoute)
-// app.use("/api/rooms",roomsRoute)
+app.use("/api/user", usersRoute);
 
 
 

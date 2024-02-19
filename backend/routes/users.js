@@ -1,15 +1,9 @@
-import express  from "express";
-import { deleteUser, getUser, getUsers, updateUser } from "../../backend/contriollers/user.js"
-import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
+import express from "express";
+import { saveToWishlist, addToCart } from "../contriollers/user.js";
 
-const router = express.Router()
+const router = express.Router();
 
+router.put("/wishlist", saveToWishlist);
+router.put("/cart", addToCart);
 
-router.put("/:id", verifyUser, updateUser)
-router.delete("/:id", verifyUser, deleteUser);
-router.get("/:id", verifyUser, getUser);
-router.get("/", verifyAdmin, getUsers)
-
-
-
-export default router
+export default router;
