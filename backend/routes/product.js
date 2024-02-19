@@ -1,15 +1,22 @@
-import express from "express";
-import { createProduct, deleteHotel, getHotel, getHotels, updateProduct } from "../contriollers/product.js";
+// productRoutes.js
 
-import { verifyAdmin } from "../utils/verifyToken.js";
+import express from "express";
+import {
+  createProduct,
+  deleteProduct,
+  getProduct,
+  getProducts,
+  updateProduct,
+} from "../contriollers/product.js";
+
+import { verifySeller } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-router.post('/',verifyAdmin, createProduct);
-router.put('/:id',verifyAdmin, updateProduct);
-router.delete('/:id',verifyAdmin, deleteHotel);
-router.get('/find/:id', getHotel);
-router.get('/', getHotels);
-
+router.post("/", verifySeller, createProduct);
+router.put("/:id", verifySeller, updateProduct);
+router.delete("/:id", verifySeller, deleteProduct);
+router.get("/find/:id", getProduct);
+router.get("/", getProducts);
 
 export default router;
