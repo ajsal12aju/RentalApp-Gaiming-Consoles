@@ -35,7 +35,6 @@ res.send("api set")
 })
 app.use("/api/auth",authRoute)
 app.use("/api/products",ProductRoute)
-
 app.use("/api/user", usersRoute);
 
 

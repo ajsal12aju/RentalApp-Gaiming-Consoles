@@ -13,7 +13,7 @@ import { verifySeller } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-router.post("/", verifySeller, createProduct);
+router.post("/",verifySeller,  createProduct);
 router.put("/:id", verifySeller, updateProduct);
 router.delete("/:id", verifySeller, deleteProduct);
 router.get("/find/:id", getProduct);
