@@ -30,9 +30,6 @@ mongoose.connection.on("disconnected", ()=>{
 
 // middle were
 
-app.get("/", (req, res)=>{
-res.send("api set")
-})
 app.use("/api/auth",authRoute)
 app.use("/api/products",ProductRoute)
 app.use("/api/user", usersRoute);
