@@ -5,9 +5,11 @@ import {
   placeOrder,
   viewUserDetails,
   updateUserDetails,
+  getAllusers
 } from "../contriollers/user.js";
 
 const router = express.Router();
+router.get("/", getAllusers)
 router.get("/:username", viewUserDetails);
 router.put("/:username", updateUserDetails);
 router.put("/wishlist", saveToWishlist);

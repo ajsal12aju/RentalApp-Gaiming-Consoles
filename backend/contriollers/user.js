@@ -2,7 +2,14 @@ import User from "../models/User.js";
 import Product from "../models/Product.js";
 
 
-
+export const getAllusers = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const viewUserDetails = async (req, res, next) => {
   try {
