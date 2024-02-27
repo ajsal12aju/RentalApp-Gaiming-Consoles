@@ -95,12 +95,13 @@ export const login = async (req, res, next) => {
       return res.status(400).json({ message: "Invalid username or password." });
     }
 
-    console.log(user, "====user=========");
+    console.log(user, "====user==========");
     const token = jwt.sign(
       { userId: user._id, userType: user.userType },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+    
 
     res
       .cookie("access_token", token, {
